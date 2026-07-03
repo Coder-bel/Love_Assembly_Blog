@@ -6,10 +6,17 @@ import { Button } from '@/components/ui/button';
 import { fetchAllEvents } from '@/lib/queries';
 import { formatEventDateLong, formatEventTime } from '@/lib/format';
 import type { EventItem } from '@/lib/types';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 
 export function EventsPage() {
   const [events, setEvents] = useState<EventItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
 
   useEffect(() => {
     fetchAllEvents()
@@ -27,7 +34,7 @@ export function EventsPage() {
       <PageHeader
         breadcrumb="Home / Events"
         title="Events Calendar"
-        description="Stay connected with everything happening at Love Assembly — from worship services to conferences and community outreach."
+        description="Stay connected with everything happening at Love Assembly from worship services to conferences and community outreach."
         bgImage="https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg"
       />
 
@@ -93,7 +100,11 @@ export function EventsPage() {
 
                     {/* CTA */}
                     <div className="hidden sm:block">
-                      <Button variant="outline" className="border-brand-200 text-brand-800 hover:bg-brand-50">
+                      <Button
+                        variant="outline"
+                        onClick={() => setSelectedEvent(event)}
+                        className="border-brand-200 text-brand-800 hover:bg-brand-50"
+                      >
                         Details <ArrowRight className="ml-1 h-3.5 w-3.5" />
                       </Button>
                     </div>
@@ -141,6 +152,45 @@ export function EventsPage() {
           </div>
         </section>
       )}
+
+      {/* Event Details Lightbox */}
+      <Dialog open={!!selectedEvent} onOpenChange={(open) => !open && setSelectedEvent(null)}>
+        <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+          {selectedEvent && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="text-2xl font-bold text-brand-950">
+                  {selectedEvent.title}
+                </DialogTitle>
+              </DialogHeader>
+              {selectedEvent.banner_url && (
+                <div className="overflow-hidden rounded-xl">
+                  <img
+                    src={selectedEvent.banner_url}
+                    alt={selectedEvent.title}
+                    className="w-full h-auto object-contain"
+                  />
+                </div>
+              )}
+              <div className="flex flex-wrap gap-4 text-sm text-slate-500">
+                <span className="flex items-center gap-1.5">
+                  <Clock className="h-4 w-4" /> {formatEventTime(selectedEvent.date)}
+                </span>
+                {selectedEvent.venue && (
+                  <span className="flex items-center gap-1.5">
+                    <MapPin className="h-4 w-4" /> {selectedEvent.venue}
+                  </span>
+                )}
+              </div>
+              {selectedEvent.description && (
+                <p className="text-slate-600 leading-relaxed">
+                  {selectedEvent.description}
+                </p>
+              )}
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

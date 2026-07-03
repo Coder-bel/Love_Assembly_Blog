@@ -91,6 +91,14 @@ export interface PrayerRequest {
   is_private: boolean;
   created_at: string;
 }
+export interface ContactMessage {
+  id: string;
+  name: string;
+  email: string;
+  subject: string | null;
+  message: string;
+  created_at: string;
+}
 
 export interface NewsletterSubscriber {
   id: string;

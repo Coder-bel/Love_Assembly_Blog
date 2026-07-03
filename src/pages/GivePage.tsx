@@ -16,8 +16,8 @@ const bankDetails = [
 
 const givingOptions = [
   { icon: Building2, title: 'Bank Transfer', description: 'Transfer directly to our church account. Use the reference field to specify your giving purpose.' },
-  { icon: CreditCard, title: 'Online Payment', description: 'Give securely online via Paystack or Flutterwave using your debit/credit card.' },
-  { icon: Globe, title: 'International Giving', description: 'For donations from outside Nigeria, use our international payment gateway.' },
+  { icon: CreditCard, title: 'Online Payment', description: 'Give securely online via Paystack or Flutterwave using your debit/credit card. NOT AVAILABLE' },
+  { icon: Globe, title: 'International Giving', description: 'For donations from outside Nigeria, use our international payment gateway. NOT AVAILABLE' },
 ];
 
 const givingTypes = [
@@ -95,26 +95,6 @@ export function GivePage() {
             </div>
           </Reveal>
 
-          {/* Online giving */}
-          <Reveal delay={200}>
-            <div className="mt-8 rounded-2xl bg-gradient-to-br from-brand-900 to-brand-700 p-8 text-center">
-              <h3 className="text-2xl font-bold text-white">Give Online</h3>
-              <p className="mt-3 text-brand-100/80">
-                Securely give online via Paystack or Flutterwave. Fast, easy, and safe.
-              </p>
-              <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-                <Button size="lg" className="bg-gold-500 text-brand-950 hover:bg-gold-400">
-                  <CreditCard className="mr-2 h-4 w-4" /> Give with Paystack
-                </Button>
-                <Button size="lg" variant="outline" className="bg-transparent border-white/30 text-white hover:bg-white/10 hover:text-white">
-                  <CreditCard className="mr-2 h-4 w-4" /> Give with Flutterwave
-                </Button>
-              </div>
-              <p className="mt-4 flex items-center justify-center gap-1.5 text-xs text-brand-200">
-                <Shield className="h-3.5 w-3.5" /> Your payment is secured with bank-level encryption
-              </p>
-            </div>
-          </Reveal>
         </div>
       </section>
 

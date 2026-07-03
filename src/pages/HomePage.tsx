@@ -5,9 +5,9 @@ import { Button } from '@/components/ui/button';
 import { SectionHeading } from '@/components/shared/SectionHeading';
 import { Reveal } from '@/components/shared/Reveal';
 import { CountUp } from '@/components/shared/CountUp';
-import { fetchLeaders } from '@/lib/queries';
+import { fetchLeaders, fetchUpcomingEvents } from '@/lib/queries';
 import { formatEventDateLong, formatEventTime } from '@/lib/format';
-import type { Leader } from '@/lib/types';
+import type { Leader, EventItem } from '@/lib/types';
 
 const heroImage = 'https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg';
 
@@ -19,25 +19,21 @@ const stats = [
 ];
 
 const weeklyServices = [
-  { name: 'Midweek Service', day: 'Wednesday', time: '6:30 PM', description: 'A midweek boost of worship, prayer, and Bible study to strengthen your walk with God.' },
-  { name: 'Prayer Meeting', day: 'Friday', time: '7:00 PM', description: 'An evening of fervent prayer and intercession for the church, the nation, and personal needs.' },
+  { name: 'Digging Deep', day: 'Tuesday', time: '5:30 – 6:30 PM', description: 'A midweek gathering to dig deeper into the Word and grow in understanding and revelation.' },
+  { name: 'Faith Clinic', day: 'Thursday', time: '5:30 – 6:30 PM', description: 'A time of teaching and impartation to strengthen and build your faith.' },
 ];
 
 const sundayServices = [
-  { name: 'First Service', time: '8:00 AM', description: 'An early morning service with worship, prayer, and the Word. A quiet, reflective atmosphere to start your Sunday.' },
-  { name: 'Second Service', time: '10:30 AM', description: 'Our main worship service with vibrant praise, deep teaching, and fellowship for the whole family.' },
+  { name: "Workers' Meeting", time: '7:30 AM', description: 'A time of preparation, prayer, and coordination for all church workers ahead of Sunday service.' },
+  { name: 'Sunday School', time: '8:00 AM', description: 'Bible-based teaching and discussion for all ages before the main service begins.' },
+  { name: 'Sunday Service', time: '9:00 – 11:00 AM', description: 'Our main worship service with vibrant praise, deep teaching, and fellowship for the whole family.' },
 ];
 
-// Placeholder flier slots — real fliers will be uploaded later
-const placeholderFliers = [
-  { id: '1', title: 'Zonal Holy Ghost Congress', date: '2026-07-15T17:00:00+00', venue: 'Love Assembly Auditorium', notes: 'A powerful night of worship, prayer, and the Word. Join thousands for an outpouring of the Holy Spirit. Come expectant for breakthroughs and divine encounters.' },
-  { id: '2', title: 'Youth Convention 2026', date: '2026-07-25T10:00:00+00', venue: 'Youth Hall, Love Assembly', notes: 'Three days of teaching, worship, and fellowship equipping the next generation with fire, vision, and purpose. Open to all youth ages 13-30.' },
-  { id: '3', title: 'Marriage Seminar', date: '2026-08-08T16:00:00+00', venue: 'Main Sanctuary', notes: 'A two-day seminar for couples and those preparing for marriage. Biblical foundations for lasting relationships. Registration required.' },
-];
 
 export function HomePage() {
   const navigate = useNavigate();
   const [leaders, setLeaders] = useState<Leader[]>([]);
+  const [events, setEvents] = useState<EventItem[]>([]);
   const [activeFlier, setActiveFlier] = useState(0);
 
   useEffect(() => {
@@ -48,11 +44,16 @@ export function HomePage() {
       .catch(() => {});
   }, []);
 
+  useEffect(() => {
+    fetchUpcomingEvents(5)
+      .then(setEvents)
+      .catch(() => {});
+  }, []);
+
   const pastor = leaders[0] ?? null;
 
-  const nextFlier = () => setActiveFlier((prev) => (prev + 1) % placeholderFliers.length);
-  const prevFlier = () => setActiveFlier((prev) => (prev - 1 + placeholderFliers.length) % placeholderFliers.length);
-
+  const nextFlier = () => setActiveFlier((prev) => (prev + 1) % events.length);
+  const prevFlier = () => setActiveFlier((prev) => (prev - 1 + events.length) % events.length);
   return (
     <div>
       {/* HERO */}
@@ -66,7 +67,6 @@ export function HomePage() {
           <div className="max-w-3xl">
             <Reveal>
               <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-brand-100 backdrop-blur-sm ring-1 ring-white/20">
-                <Sparkles className="h-3.5 w-3.5 text-gold-400" />
                 Welcome to Love Assembly
               </span>
             </Reveal>
@@ -107,12 +107,12 @@ export function HomePage() {
               <div className="mt-10 flex items-center gap-6 text-sm text-brand-100/70">
                 <div className="flex items-center gap-2">
                   <MapPin className="h-4 w-4" />
-                  <span>3510 27 St NE, Calgary</span>
+                  <span>RF48+W43, Loburo 110113, Ogun State</span>
                 </div>
                 <div className="h-4 w-px bg-white/20" />
                 <div className="flex items-center gap-2">
                   <Calendar className="h-4 w-4" />
-                  <span>Sundays 8:00 & 10:30 AM</span>
+                  <span>Sundays 9:00 AM</span>
                 </div>
               </div>
             </Reveal>
@@ -169,12 +169,12 @@ export function HomePage() {
               <SectionHeading
                 eyebrow="Sunday Worship"
                 title="Sunday Services"
-                description="Two services every Sunday — come worship with us."
+                description="Come worship with us every sunday."
                 align="left"
               />
             </div>
           </Reveal>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-3">
             {sundayServices.map((service, i) => (
               <Reveal key={service.name} delay={i * 100}>
                 <div className="group h-full rounded-2xl border border-slate-100 bg-white p-6 transition-all hover:shadow-lg hover:border-brand-200">
@@ -193,106 +193,124 @@ export function HomePage() {
             ))}
           </div>
 
-          {/* Upcoming Events — Flier Carousel + Info Panel */}
-          <Reveal delay={200}>
-            <div className="mt-16 mb-6">
-              <SectionHeading
-                eyebrow="What's Coming Up"
-                title="Upcoming Events"
-                description="Swipe through event fliers and details below."
-                align="left"
-              />
+{/* Upcoming Events — Flier Carousel + Info Panel */}
+<Reveal delay={200}>
+  <div className="mt-16 mb-6">
+    <SectionHeading
+      eyebrow="What's Coming Up"
+      title="Upcoming Events"
+      description="Swipe through event fliers and details below."
+      align="left"
+    />
+  </div>
+</Reveal>
+
+{events.length === 0 ? (
+  <div className="rounded-2xl border border-slate-200 bg-slate-50 p-12 text-center">
+    <Calendar className="mx-auto h-12 w-12 text-slate-300 mb-4" />
+    <h3 className="text-lg font-semibold text-slate-700">No upcoming events</h3>
+    <p className="mt-2 text-sm text-slate-500">Check back soon for new events.</p>
+  </div>
+) : (
+  <div className="grid gap-6 lg:grid-cols-2 lg:items-stretch">
+    {/* Flier carousel */}
+    <Reveal>
+      <div className="relative h-full">
+        <div className="relative aspect-[3/4] sm:aspect-[4/3] overflow-hidden rounded-2xl bg-slate-100 shadow-md ring-1 ring-slate-100">
+          {events.map((flier, i) => (
+            <div
+              key={flier.id}
+              className={`absolute inset-0 transition-opacity duration-500 ${i === activeFlier ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+            >
+              {flier.banner_url ? (
+                <img
+                  src={flier.banner_url}
+                  alt={flier.title}
+                  className="h-full w-full object-contain"
+                />
+              ) : (
+                <div className="flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-brand-800 via-brand-700 to-brand-600 p-8 text-center">
+                  <ImageIcon className="h-12 w-12 text-white/30 mb-4" />
+                  <p className="text-white/50 text-sm font-medium">Flier Coming Soon</p>
+                  <p className="mt-2 text-white font-bold text-lg">{flier.title}</p>
+                  <p className="mt-1 text-brand-200 text-sm">{formatEventDateLong(flier.date)}</p>
+                </div>
+              )}
             </div>
-          </Reveal>
-          <div className="grid gap-6 lg:grid-cols-2 lg:items-stretch">
-            {/* Flier carousel */}
-            <Reveal>
-              <div className="relative h-full">
-                <div className="relative aspect-[3/4] sm:aspect-[4/3] overflow-hidden rounded-2xl bg-slate-100 shadow-md ring-1 ring-slate-100">
-                  {placeholderFliers.map((flier, i) => (
-                    <div
-                      key={flier.id}
-                      className={`absolute inset-0 transition-opacity duration-500 ${i === activeFlier ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-                    >
-                      {/* Placeholder flier slot */}
-                      <div className="flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-brand-800 via-brand-700 to-brand-600 p-8 text-center">
-                        <ImageIcon className="h-12 w-12 text-white/30 mb-4" />
-                        <p className="text-white/50 text-sm font-medium">Flier Placeholder</p>
-                        <p className="mt-2 text-white font-bold text-lg">{flier.title}</p>
-                        <p className="mt-1 text-brand-200 text-sm">{formatEventDateLong(flier.date)}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+          ))}
+        </div>
 
-                {/* Arrow controls */}
-                <button
-                  onClick={prevFlier}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 shadow-md text-brand-900 transition-all hover:bg-white"
-                  aria-label="Previous flier"
-                >
-                  <ChevronLeft className="h-5 w-5" />
-                </button>
-                <button
-                  onClick={nextFlier}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 shadow-md text-brand-900 transition-all hover:bg-white"
-                  aria-label="Next flier"
-                >
-                  <ChevronRight className="h-5 w-5" />
-                </button>
+        {/* Arrow controls */}
+        <button
+          onClick={prevFlier}
+          className="absolute left-3 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 shadow-md text-brand-900 transition-all hover:bg-white"
+          aria-label="Previous flier"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <button
+          onClick={nextFlier}
+          className="absolute right-3 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 shadow-md text-brand-900 transition-all hover:bg-white"
+          aria-label="Next flier"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
 
-                {/* Dot navigation */}
-                <div className="mt-4 flex items-center justify-center gap-2">
-                  {placeholderFliers.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setActiveFlier(i)}
-                      aria-label={`Go to flier ${i + 1}`}
-                      className={`h-2 rounded-full transition-all ${i === activeFlier ? 'w-8 bg-brand-700' : 'w-2 bg-slate-300 hover:bg-slate-400'}`}
-                    />
-                  ))}
-                </div>
-              </div>
-            </Reveal>
+        {/* Dot navigation */}
+        <div className="mt-4 flex items-center justify-center gap-2">
+          {events.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setActiveFlier(i)}
+              aria-label={`Go to flier ${i + 1}`}
+              className={`h-2 rounded-full transition-all ${i === activeFlier ? 'w-8 bg-brand-700' : 'w-2 bg-slate-300 hover:bg-slate-400'}`}
+            />
+          ))}
+        </div>
+      </div>
+    </Reveal>
 
-            {/* Info panel — synced to active flier */}
-            <Reveal delay={100}>
-              <div className="h-full rounded-2xl bg-white p-8 shadow-md ring-1 ring-slate-100 flex flex-col">
-                <div key={activeFlier} className="animate-fade-in flex-1">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700">
-                    <Calendar className="h-3 w-3" /> {formatEventDateLong(placeholderFliers[activeFlier].date)}
-                  </span>
-                  <h3 className="mt-4 text-2xl font-bold text-brand-950">
-                    {placeholderFliers[activeFlier].title}
-                  </h3>
-                  <div className="mt-3 flex items-center gap-2 text-sm text-slate-500">
-                    <Clock className="h-4 w-4" />
-                    <span>{formatEventTime(placeholderFliers[activeFlier].date)}</span>
-                  </div>
-                  <div className="mt-1 flex items-center gap-2 text-sm text-slate-500">
-                    <MapPin className="h-4 w-4" />
-                    <span>{placeholderFliers[activeFlier].venue}</span>
-                  </div>
-                  <p className="mt-4 text-slate-600 leading-relaxed">
-                    {placeholderFliers[activeFlier].notes}
-                  </p>
-                </div>
-                <div className="mt-6 pt-6 border-t border-slate-100">
-                  <Button
-                    variant="outline"
-                    onClick={() => navigate({ to: '/events' })}
-                    className="border-brand-200 text-brand-800 hover:bg-brand-50"
-                  >
-                    View All Events <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-            </Reveal>
+    {/* Info panel — synced to active flier */}
+    <Reveal delay={100}>
+      <div className="h-full rounded-2xl bg-white p-8 shadow-md ring-1 ring-slate-100 flex flex-col">
+        <div key={activeFlier} className="animate-fade-in flex-1">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700">
+            <Calendar className="h-3 w-3" /> {formatEventDateLong(events[activeFlier].date)}
+          </span>
+          <h3 className="mt-4 text-2xl font-bold text-brand-950">
+            {events[activeFlier].title}
+          </h3>
+          <div className="mt-3 flex items-center gap-2 text-sm text-slate-500">
+            <Clock className="h-4 w-4" />
+            <span>{formatEventTime(events[activeFlier].date)}</span>
           </div>
+          {events[activeFlier].venue && (
+            <div className="mt-1 flex items-center gap-2 text-sm text-slate-500">
+              <MapPin className="h-4 w-4" />
+              <span>{events[activeFlier].venue}</span>
+            </div>
+          )}
+          <p className="mt-4 text-slate-600 leading-relaxed">
+            {events[activeFlier].description}
+          </p>
+        </div>
+        <div className="mt-6 pt-6 border-t border-slate-100">
+          <Button
+            variant="outline"
+            onClick={() => navigate({ to: '/events' })}
+            className="border-brand-200 text-brand-800 hover:bg-brand-50"
+          >
+            View All Events <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
+      </div>
+    </Reveal>
+  </div>
+)}
         </div>
       </section>
 
-      {/* ABOUT SNAPSHOT — "Our Story" */}
+      {/* ABOUT SNAPSHOT — "Our Story" */}      
       <section className="py-20 lg:py-28 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">

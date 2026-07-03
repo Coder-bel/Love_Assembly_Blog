@@ -4,8 +4,8 @@ import { PageHeader } from '@/components/shared/PageHeader';
 import { SectionHeading } from '@/components/shared/SectionHeading';
 import { Reveal } from '@/components/shared/Reveal';
 import { Button } from '@/components/ui/button';
-import { supabase } from '@/lib/supabase';
 import { fetchTestimonies } from '@/lib/queries';
+import { submitPrayerRequest, submitTestimony as submitTestimonyForm } from '@/lib/formSubmit';
 import { formatBlogDate } from '@/lib/format';
 import type { Testimony } from '@/lib/types';
 import { toast } from 'sonner';
@@ -32,49 +32,43 @@ export function PrayerTestimoniesPage() {
       .finally(() => setLoading(false));
   }, []);
 
-  const submitPrayer = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setPrayerLoading(true);
-    try {
-      const { error } = await supabase.from('prayer_requests').insert({
-        name: prayer.name,
-        email: prayer.email || null,
-        phone: prayer.phone || null,
-        request: prayer.request,
-        is_private: prayer.is_private,
-      });
-      if (error) throw error;
-      toast.success('Your prayer request has been received. Our prayer team is praying for you.');
-      setPrayerDone(true);
-      setPrayer({ name: '', email: '', phone: '', request: '', is_private: false });
-    } catch {
-      toast.error('Something went wrong. Please try again.');
-    } finally {
-      setPrayerLoading(false);
-    }
-  };
-
-  const submitTestimony = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setTestimonyLoading(true);
-    try {
-      const { error } = await supabase.from('testimonies').insert({
-        name: testimony.name,
-        title: testimony.title,
-        body: testimony.body,
-        approved: false,
-      });
-      if (error) throw error;
-      toast.success('Thank you for sharing your testimony! It will be reviewed and published soon.');
-      setTestimonyDone(true);
-      setTestimony({ name: '', title: '', body: '' });
-    } catch {
-      toast.error('Something went wrong. Please try again.');
-    } finally {
-      setTestimonyLoading(false);
-    }
-  };
-
+const submitPrayer = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setPrayerLoading(true);
+  try {
+    await submitPrayerRequest({
+      name: prayer.name,
+      email: prayer.email,
+      phone: prayer.phone,
+      request: prayer.request,
+    });
+    toast.success('Your prayer request has been received. Our prayer team is praying for you.');
+    setPrayerDone(true);
+    setPrayer({ name: '', email: '', phone: '', request: '', is_private: false });
+  } catch {
+    toast.error('Something went wrong. Please try again.');
+  } finally {
+    setPrayerLoading(false);
+  }
+};
+const submitTestimony = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setTestimonyLoading(true);
+  try {
+    await submitTestimonyForm({
+      name: testimony.name,
+      title: testimony.title,
+      body: testimony.body,
+    });
+    toast.success('Thank you for sharing your testimony! It will be reviewed and published soon.');
+    setTestimonyDone(true);
+    setTestimony({ name: '', title: '', body: '' });
+  } catch {
+    toast.error('Something went wrong. Please try again.');
+  } finally {
+    setTestimonyLoading(false);
+  }
+};
   return (
     <div>
       <PageHeader
