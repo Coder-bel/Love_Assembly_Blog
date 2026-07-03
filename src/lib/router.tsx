@@ -4,17 +4,10 @@ import { HomePage } from '@/pages/HomePage';
 import { AboutZonePage } from '@/pages/AboutZonePage';
 import { AboutRCCGPage } from '@/pages/AboutRCCGPage';
 import { LeadershipPage } from '@/pages/LeadershipPage';
-import { ParishesPage } from '@/pages/ParishesPage';
-import { SermonsPage } from '@/pages/SermonsPage';
-import { SermonDetailPage } from '@/pages/SermonDetailPage';
-import { BlogPage } from '@/pages/BlogPage';
-import { BlogPostPage } from '@/pages/BlogPostPage';
 import { EventsPage } from '@/pages/EventsPage';
-import { MinistriesPage } from '@/pages/MinistriesPage';
 import { GivePage } from '@/pages/GivePage';
 import { ContactPage } from '@/pages/ContactPage';
 import { PrayerTestimoniesPage } from '@/pages/PrayerTestimoniesPage';
-import { LiveStreamPage } from '@/pages/LiveStreamPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
 const rootRoute = createRootRoute({
@@ -49,46 +42,10 @@ const leadershipRoute = createRoute({
   component: LeadershipPage,
 });
 
-const parishesRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/parishes',
-  component: ParishesPage,
-});
-
-const sermonsRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/sermons',
-  component: SermonsPage,
-});
-
-const sermonDetailRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/sermons/$id',
-  component: SermonDetailPage,
-});
-
-const blogRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/blog',
-  component: BlogPage,
-});
-
-const blogPostRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/blog/$slug',
-  component: BlogPostPage,
-});
-
 const eventsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/events',
   component: EventsPage,
-});
-
-const ministriesRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/ministries',
-  component: MinistriesPage,
 });
 
 const giveRoute = createRoute({
@@ -109,12 +66,6 @@ const prayerRoute = createRoute({
   component: PrayerTestimoniesPage,
 });
 
-const liveStreamRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/live',
-  component: LiveStreamPage,
-});
-
 const notFoundRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '*',
@@ -126,17 +77,10 @@ const routeTree = rootRoute.addChildren([
   aboutZoneRoute,
   aboutRCCGRoute,
   leadershipRoute,
-  parishesRoute,
-  sermonsRoute,
-  sermonDetailRoute,
-  blogRoute,
-  blogPostRoute,
   eventsRoute,
-  ministriesRoute,
   giveRoute,
   contactRoute,
   prayerRoute,
-  liveStreamRoute,
   notFoundRoute,
 ]);
 

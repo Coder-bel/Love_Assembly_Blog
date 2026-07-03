@@ -3,17 +3,13 @@ import { Link, useLocation, useNavigate } from '@tanstack/react-router';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { RCCGLogo } from '@/components/shared/RCCGLogo';
 
 const navLinks = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Leadership', to: '/leadership' },
-  { label: 'Parishes', to: '/parishes' },
-  { label: 'Sermons', to: '/sermons' },
-  { label: 'Blog', to: '/blog' },
   { label: 'Events', to: '/events' },
-  { label: 'Ministries', to: '/ministries' },
-  { label: 'Live', to: '/live' },
   { label: 'Contact', to: '/contact' },
 ];
 
@@ -47,15 +43,16 @@ export function Navbar() {
         )}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-16 lg:h-20">
-          {/* Logo */}
+          {/* Logo lockup: RCCG logo + Love Assembly text */}
           <Link to="/" className="flex items-center gap-2.5 group">
             <div className={cn(
               'flex h-10 w-10 lg:h-12 lg:w-12 items-center justify-center rounded-xl transition-all',
-              transparent ? 'bg-white/15 backdrop-blur-sm' : 'bg-brand-900'
+              transparent ? 'bg-white/15 backdrop-blur-sm' : 'bg-white'
             )}>
-              <svg viewBox="0 0 24 24" className={cn('h-6 w-6 lg:h-7 lg:w-7', transparent ? 'text-white' : 'text-white')} fill="currentColor">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-              </svg>
+              <RCCGLogo
+                variant={transparent ? 'light' : 'dark'}
+                className="h-7 w-7 lg:h-9 lg:w-9"
+              />
             </div>
             <div className="flex flex-col leading-tight">
               <span className={cn(
@@ -68,7 +65,7 @@ export function Navbar() {
                 'text-[10px] lg:text-xs font-medium tracking-wide transition-colors',
                 transparent ? 'text-white/70' : 'text-slate-500'
               )}>
-                RCCG Zonal HQ
+                RCCG
               </span>
             </div>
           </Link>

@@ -1,129 +1,67 @@
-import { useEffect, useState } from 'react';
-import { Mail, Phone } from 'lucide-react';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { SectionHeading } from '@/components/shared/SectionHeading';
 import { Reveal } from '@/components/shared/Reveal';
-import { fetchLeaders } from '@/lib/queries';
-import type { Leader } from '@/lib/types';
 
 export function LeadershipPage() {
-  const [leaders, setLeaders] = useState<Leader[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchLeaders()
-      .then(setLeaders)
-      .catch(() => {})
-      .finally(() => setLoading(false));
-  }, []);
-
-  const zonalPastor = leaders.find((l) => l.role.toLowerCase().includes('zonal pastor')) ?? leaders[0];
-  const otherLeaders = leaders.filter((l) => l.id !== zonalPastor?.id);
-
   return (
     <div>
       <PageHeader
         breadcrumb="Home / Leadership"
-        title="Our Leadership Team"
-        description="Dedicated men and women called by God to shepherd, teach, and serve the Love Assembly family."
+        title="Our Leadership"
+        description="Meet the shepherd God has placed over Christ Love Assembly."
         bgImage="https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg"
       />
 
-      {/* Zonal Pastor spotlight */}
-      {zonalPastor && (
-        <section className="py-20 lg:py-28 bg-white">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid gap-12 lg:grid-cols-5 lg:items-center">
-              <Reveal className="lg:col-span-2">
-                <div className="relative mx-auto max-w-sm">
-                  <div className="aspect-[3/4] overflow-hidden rounded-2xl shadow-xl">
-                    {zonalPastor.photo_url ? (
-                      <img src={zonalPastor.photo_url} alt={zonalPastor.name} className="h-full w-full object-cover" />
-                    ) : (
-                      <div className="h-full w-full bg-gradient-to-br from-brand-800 to-brand-600" />
-                    )}
+      {/* Pastor in charge — text write-up with placeholder image */}
+      <section className="py-20 lg:py-28 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-5 lg:items-center">
+            {/* Placeholder pastor image — can be swapped later */}
+            <Reveal className="lg:col-span-2">
+              <div className="relative mx-auto max-w-sm">
+                <div className="aspect-[3/4] overflow-hidden rounded-2xl shadow-xl bg-gradient-to-br from-brand-800 to-brand-600 flex items-center justify-center">
+                  <div className="text-center text-white/60">
+                    <svg viewBox="0 0 24 24" className="mx-auto h-16 w-16" fill="currentColor" opacity="0.4">
+                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                    </svg>
+                    <p className="mt-3 text-sm font-medium">Pastor's photo</p>
                   </div>
                 </div>
-              </Reveal>
-              <div className="lg:col-span-3">
-                <SectionHeading eyebrow="Zonal Pastor" title={zonalPastor.name} align="left" />
-                <Reveal delay={200}>
-                  <p className="mt-6 text-slate-600 leading-relaxed text-lg">
-                    {zonalPastor.bio}
-                  </p>
-                </Reveal>
-                <Reveal delay={300}>
-                  <div className="mt-6 flex flex-wrap gap-4">
-                    {zonalPastor.email && (
-                      <a href={`mailto:${zonalPastor.email}`} className="inline-flex items-center gap-2 text-sm text-brand-700 hover:text-brand-800">
-                        <Mail className="h-4 w-4" /> {zonalPastor.email}
-                      </a>
-                    )}
-                    {zonalPastor.phone && (
-                      <a href={`tel:${zonalPastor.phone}`} className="inline-flex items-center gap-2 text-sm text-brand-700 hover:text-brand-800">
-                        <Phone className="h-4 w-4" /> {zonalPastor.phone}
-                      </a>
-                    )}
-                  </div>
-                </Reveal>
+                <div className="absolute -top-4 -left-4 h-24 w-24 rounded-2xl bg-gold-500/20 -z-10" />
+                <div className="absolute -bottom-4 -right-4 h-24 w-24 rounded-2xl bg-brand-500/20 -z-10" />
               </div>
+            </Reveal>
+
+            <div className="lg:col-span-3">
+              <SectionHeading
+                eyebrow="Pastor in Charge"
+                title="Our Pastor"
+                align="left"
+              />
+              <Reveal delay={200}>
+                <div className="mt-6 space-y-4 text-slate-600 leading-relaxed text-lg">
+                  <p>
+                    Our Pastor in Charge leads Christ Love Assembly with a heart for God's
+                    people and a passion for the gospel. Called to shepherd this flock, the
+                    pastor brings a deep commitment to prayer, the Word, and the spiritual
+                    growth of every member.
+                  </p>
+                  <p>
+                    Under the pastor's leadership, Christ Love Assembly has grown from a small
+                    gathering in a living room to a thriving church family. The pastor's vision
+                    is to see every member equipped, empowered, and walking in their God-given
+                    purpose — a community where God's love is real, His power is present, and
+                    lives are transformed.
+                  </p>
+                  <p>
+                    More details about our pastor and the leadership team will be shared here
+                    soon. We invite you to visit us in person and experience the warmth and love
+                    of our church family.
+                  </p>
+                </div>
+              </Reveal>
             </div>
           </div>
-        </section>
-      )}
-
-      {/* Other leaders */}
-      <section className="py-20 lg:py-28 bg-slate-50">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="The Team"
-            title="Assistant Pastors & Exco"
-            description="The dedicated team that helps lead and serve our zonal community."
-          />
-          {loading ? (
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="h-72 animate-pulse rounded-2xl bg-slate-200" />
-              ))}
-            </div>
-          ) : (
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {otherLeaders.map((leader, i) => (
-                <Reveal key={leader.id} delay={i * 100}>
-                  <div className="group h-full overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-100 transition-all hover:shadow-lg hover:-translate-y-1">
-                    <div className="aspect-[4/3] overflow-hidden">
-                      {leader.photo_url ? (
-                        <img src={leader.photo_url} alt={leader.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                      ) : (
-                        <div className="h-full w-full bg-gradient-to-br from-brand-700 to-brand-500" />
-                      )}
-                    </div>
-                    <div className="p-5">
-                      <h3 className="text-lg font-bold text-brand-950">{leader.name}</h3>
-                      <p className="text-sm font-medium text-brand-600">{leader.role}</p>
-                      {leader.bio && (
-                        <p className="mt-3 text-sm text-slate-600 leading-relaxed line-clamp-3">
-                          {leader.bio}
-                        </p>
-                      )}
-                      <div className="mt-4 flex gap-3">
-                        {leader.email && (
-                          <a href={`mailto:${leader.email}`} className="text-slate-400 hover:text-brand-700 transition-colors" aria-label="Email">
-                            <Mail className="h-4 w-4" />
-                          </a>
-                        )}
-                        {leader.phone && (
-                          <a href={`tel:${leader.phone}`} className="text-slate-400 hover:text-brand-700 transition-colors" aria-label="Phone">
-                            <Phone className="h-4 w-4" />
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          )}
         </div>
       </section>
     </div>

@@ -20,48 +20,102 @@ export function AboutZonePage() {
     <div>
       <PageHeader
         breadcrumb="Home / About"
-        title="About Love Assembly"
-        description="Our history, our mission, and the journey of faith that has shaped us into who we are today."
+        title="About Christ Love Assembly"
+        description="Our roots, our mission, and the journey of faith that has shaped us into who we are today."
         bgImage="https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg"
       />
 
-      {/* History */}
+      {/* Our Roots */}
       <section className="py-20 lg:py-28 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+          <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
             <Reveal>
               <div className="aspect-[4/3] overflow-hidden rounded-2xl shadow-xl">
                 <img
                   src="https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg"
-                  alt="Love Assembly history"
+                  alt="Christ Love Assembly"
                   className="h-full w-full object-cover"
                 />
               </div>
             </Reveal>
             <div>
               <SectionHeading
-                eyebrow="Our History"
-                title="From Humble Beginnings"
+                eyebrow="Our Roots"
+                title="Where It All Began"
+                align="left"
+              />
+              <Reveal delay={200}>
+                <div className="mt-6 text-slate-600 leading-relaxed">
+                  <p>
+                    Christ Love Assembly is one of the several thousand parishes of The Redeemed
+                    Christian Church of God (RCCG) worldwide. RCCG was founded in Nigeria in the
+                    year 1952. It started out as a small home group called "the Glory of God
+                    fellowship" at Willoughby street, Ebute-Metta, Lagos, Nigeria in West Africa.
+                    The name was changed to The Redeemed Christian Church of God after God
+                    revealed this to Pa Akindayomi (the founder) in a vision. It was truly amazing
+                    because at the time Pa Akindayomi could neither read nor write, but he was able
+                    to reproduce what he saw in his vision which was the current name for the
+                    church. Initially there were nine members, but before long the fellowship grew
+                    as news of the miracles that occurred in their midst spread. Pa Akindayomi was
+                    succeeded by Pastor E.A. Adeboye in 1980, and he is the current General
+                    Overseer of RCCG worldwide. Since 1981, an open explosion began with the
+                    number of parishes growing in leaps and bounds. At the last count, there are
+                    at least 2000 parishes of the Redeemed Christian Church of God in Nigeria. RCCG
+                    also has a strong presence in other African nations including C'ote D'Ivoire,
+                    Ghana, Zambia, Malawi, Zaire, Tanzania, Kenya, Uganda, Gambia, Cameroon, and
+                    South Africa. In Europe, the church is fully established in the following
+                    countries: United Kingdom, Netherlands, Spain, Italy, Germany, Greece, France.
+                  </p>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Who We Are */}
+      <section className="py-20 lg:py-28 bg-slate-50">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
+            <div className="lg:order-2">
+              <Reveal>
+                <div className="aspect-[4/3] overflow-hidden rounded-2xl shadow-xl">
+                  <img
+                    src="https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg"
+                    alt="Christ Love Assembly community"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              </Reveal>
+            </div>
+            <div className="lg:order-1">
+              <SectionHeading
+                eyebrow="Who We Are"
+                title="Our Church Family"
                 align="left"
               />
               <Reveal delay={200}>
                 <div className="mt-6 space-y-4 text-slate-600 leading-relaxed">
                   <p>
-                    Love Assembly was established in 2011 as a small parish of The Redeemed
-                    Christian Church of God. What began with a handful of worshippers in a
-                    rented hall has grown into a thriving Zonal Headquarters overseeing
-                    multiple parishes across Lagos.
+                    RCCG Christ Love Assembly is one of many parishes of The Redeemed Christian
+                    Church of God. Christ Love Assembly commenced on March 3rd, 2013 at the
+                    pastor's living room. Our second service took place in a hotel hall where we
+                    later moved to a community hall located in the southeast region of the city of
+                    Calgary. By the grace and mercy of the living God, we have acquired our own
+                    property which is located at 3510 27 street Northeast. We have since been
+                    progressing and by God's grace, we are still moving on!
                   </p>
                   <p>
-                    Through years of faithful service, passionate evangelism, and a commitment
-                    to holiness and prayer, the church has experienced remarkable growth —
-                    both in numbers and in spiritual depth. Today, Love Assembly serves as
-                    a beacon of hope and a hub of ministry activity for the zone.
+                    We are a family of Christ where His agape love binds us together. We are a
+                    soul winning, community and a ministry-based church where Holiness is our
+                    lifestyle and Heaven is our ultimate.
                   </p>
                   <p>
-                    Our journey has been marked by God's faithfulness at every turn, and we
-                    remain committed to the vision of reaching the lost, discipling believers,
-                    and planting churches that transform communities.
+                    At Christ Love Assembly, we are united by God's love, we see each other as
+                    brothers and sisters. Christ Love Assembly is a place where God truly
+                    manifest, where His power and grace reigns abundantly. We love each other with
+                    the love of God and we hope that your experience with us will generate in you
+                    deep yearning for a closer relationship with God.
                   </p>
                 </div>
               </Reveal>
@@ -71,11 +125,11 @@ export function AboutZonePage() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-20 lg:py-28 bg-slate-50">
+      <section className="py-20 lg:py-28 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-8 md:grid-cols-2">
             <Reveal>
-              <div className="h-full rounded-2xl bg-white p-8 shadow-sm ring-1 ring-slate-100">
+              <div className="h-full rounded-2xl bg-slate-50 p-8 shadow-sm ring-1 ring-slate-100">
                 <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-100 text-brand-700">
                   <Target className="h-7 w-7" />
                 </div>
@@ -88,13 +142,13 @@ export function AboutZonePage() {
               </div>
             </Reveal>
             <Reveal delay={100}>
-              <div className="h-full rounded-2xl bg-white p-8 shadow-sm ring-1 ring-slate-100">
+              <div className="h-full rounded-2xl bg-slate-50 p-8 shadow-sm ring-1 ring-slate-100">
                 <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gold-500/15 text-gold-600">
                   <Eye className="h-7 w-7" />
                 </div>
                 <h3 className="mt-5 text-2xl font-bold text-brand-950">Our Vision</h3>
                 <p className="mt-3 text-slate-600 leading-relaxed">
-                  To be a zonal headquarters that reflects the glory of God, raising Spirit-filled
+                  To be a church that reflects the glory of God, raising Spirit-filled
                   leaders, planting vibrant parishes, and impacting our generation with the
                   life-changing power of the gospel.
                 </p>
@@ -105,7 +159,7 @@ export function AboutZonePage() {
       </section>
 
       {/* Core Values */}
-      <section className="py-20 lg:py-28 bg-white">
+      <section className="py-20 lg:py-28 bg-slate-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="What Drives Us"
@@ -115,7 +169,7 @@ export function AboutZonePage() {
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((value, i) => (
               <Reveal key={value.title} delay={i * 100}>
-                <div className="group h-full rounded-2xl border border-slate-100 p-6 transition-all hover:shadow-lg hover:border-brand-200 hover:-translate-y-1">
+                <div className="group h-full rounded-2xl border border-slate-100 bg-white p-6 transition-all hover:shadow-lg hover:border-brand-200 hover:-translate-y-1">
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-700 transition-colors group-hover:bg-brand-700 group-hover:text-white">
                     <value.icon className="h-6 w-6" />
                   </div>
@@ -133,10 +187,10 @@ export function AboutZonePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             {[
-              { icon: Church, label: 'Parishes Under the Zone', value: 5, suffix: '+' },
-              { icon: Users, label: 'Active Members', value: 3000, suffix: '+' },
-              { icon: Calendar, label: 'Years of Service', value: 15, suffix: '' },
-              { icon: Heart, label: 'Souls Reached', value: 10000, suffix: '+' },
+              { icon: Church, label: 'Years of Service', value: 13, suffix: '' },
+              { icon: Users, label: 'Active Members', value: 500, suffix: '+' },
+              { icon: Calendar, label: 'Weekly Services', value: 3, suffix: '' },
+              { icon: Heart, label: 'Souls Reached', value: 5000, suffix: '+' },
             ].map((stat, i) => (
               <Reveal key={stat.label} delay={i * 100}>
                 <div>
@@ -163,7 +217,7 @@ export function AboutZonePage() {
           <Reveal delay={100}>
             <p className="mt-4 text-slate-600 leading-relaxed">
               Whether you're new to faith or looking for a church home, there's a place for you
-              at Love Assembly. We'd love to meet you.
+              at Christ Love Assembly. We'd love to meet you.
             </p>
           </Reveal>
           <Reveal delay={200}>
