@@ -13,6 +13,8 @@ const quickLinks = [
   { label: 'About Us', to: '/about' },
   { label: 'Leadership', to: '/leadership' },
   { label: 'Events', to: '/events' },
+  { label: 'Blog', to: '/blog' },
+  { label: 'Gallery', to: '/gallery' },
   { label: 'About RCCG', to: '/about-rccg' },
 ];
 
@@ -44,18 +46,18 @@ export function Footer() {
               A parish of The Redeemed Christian Church of God, committed to spreading
               the love of Christ and making disciples of all nations.
             </p>
-	     <div className="flex gap-2">
-  {socialLinks.map((social) => (
-   <a    
-      key={social.label}
-      href={social.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={social.label}
-      className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-slate-300 transition-all hover:bg-brand-700 hover:text-white"
-    >
-      <social.icon className="h-4 w-4" />
-    </a>
+            <div className="flex gap-2">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-slate-300 transition-all hover:bg-brand-700 hover:text-white"
+                >
+                  <social.icon className="h-4 w-4" />
+                </a>
               ))}
             </div>
           </div>
@@ -94,11 +96,11 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-2.5 text-sm text-slate-400">
                 <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-brand-400" />
-                <span>RF48+W43, Loburo 110113, Ogun State</span>
+                <span>3510 27 Street Northeast, Calgary, Alberta</span>
               </li>
               <li className="flex items-center gap-2.5 text-sm text-slate-400">
                 <Phone className="h-4 w-4 shrink-0 text-brand-400" />
-                <a href="tel:+234800123456" className="hover:text-white transition-colors">+234 800 123 456</a>
+                <a href="tel:+14031234567" className="hover:text-white transition-colors">+1 403 123 4567</a>
               </li>
               <li className="flex items-center gap-2.5 text-sm text-slate-400">
                 <Mail className="h-4 w-4 shrink-0 text-brand-400" />
@@ -106,8 +108,8 @@ export function Footer() {
               </li>
             </ul>
             <div className="mt-4 pt-4 border-t border-white/10">
-              
-              <a href="https://rccg.org"
+              <a
+                href="https://rccg.org"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-sm text-brand-400 hover:text-brand-300 transition-colors"
