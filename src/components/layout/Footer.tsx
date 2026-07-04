@@ -3,10 +3,10 @@ import { Facebook, Instagram, Youtube, Twitter, Mail, Phone, MapPin, ExternalLin
 import { RCCGLogo } from '@/components/shared/RCCGLogo';
 
 const socialLinks = [
-  { icon: Facebook, href: 'https://facebook.com/loveassembly', label: 'Facebook' },
-  { icon: Instagram, href: 'https://instagram.com/loveassembly', label: 'Instagram' },
-  { icon: Youtube, href: 'https://youtube.com/loveassembly', label: 'YouTube' },
-  { icon: Twitter, href: 'https://twitter.com/loveassembly', label: 'Twitter/X' },
+  { icon: Facebook, href: '#', label: 'Facebook' },
+  { icon: Instagram, href: '#', label: 'Instagram' },
+  { icon: Youtube, href: '#', label: 'YouTube' },
+  { icon: Twitter, href: '#', label: 'Twitter/X' },
 ];
 
 const quickLinks = [
@@ -79,7 +79,7 @@ export function Footer() {
             <h4 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider">Engage</h4>
             <ul className="space-y-2.5">
               {engageLinks.map((link) => (
-                <li key={link.to}>
+                <li key={link.label}>
                   <Link to={link.to} className="text-sm text-slate-400 hover:text-white transition-colors">
                     {link.label}
                   </Link>

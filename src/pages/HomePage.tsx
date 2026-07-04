@@ -80,7 +80,7 @@ export function HomePage() {
             </Reveal>
             <Reveal delay={200}>
               <p className="mt-6 text-lg sm:text-xl text-brand-100/90 leading-relaxed max-w-2xl">
-                RCCG Christ Love Assembly is a church that believes in Jesus, a church that loves
+                RCCG Love Assembly is a church that believes in Jesus, a church that loves
                 God and people. We are a family of Christ where His agape love binds us together.
               </p>
             </Reveal>
