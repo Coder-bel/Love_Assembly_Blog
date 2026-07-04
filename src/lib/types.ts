@@ -31,6 +31,7 @@ export interface BlogPost {
   body: string;
   excerpt: string | null;
   author: string;
+  preacher_name: string | null;
   category: string;
   image_url: string | null;
   published: boolean;
@@ -91,17 +92,30 @@ export interface PrayerRequest {
   is_private: boolean;
   created_at: string;
 }
-export interface ContactMessage {
-  id: string;
-  name: string;
-  email: string;
-  subject: string | null;
-  message: string;
-  created_at: string;
-}
 
 export interface NewsletterSubscriber {
   id: string;
   email: string;
+  created_at: string;
+}
+
+export interface RccgLegend {
+  id: string;
+  name: string;
+  title: string | null;
+  era: string | null;
+  photo_url: string | null;
+  bio: string;
+  display_order: number;
+  created_at: string;
+}
+
+export interface GalleryImage {
+  id: string;
+  image_url: string;
+  caption: string | null;
+  category: string;
+  event_name: string | null;
+  display_order: number;
   created_at: string;
 }

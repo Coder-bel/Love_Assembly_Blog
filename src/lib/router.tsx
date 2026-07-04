@@ -8,6 +8,10 @@ import { EventsPage } from '@/pages/EventsPage';
 import { GivePage } from '@/pages/GivePage';
 import { ContactPage } from '@/pages/ContactPage';
 import { PrayerTestimoniesPage } from '@/pages/PrayerTestimoniesPage';
+import { BlogPage } from '@/pages/BlogPage';
+import { MessagesPage } from '@/pages/MessagesPage';
+import { LegendsPage } from '@/pages/LegendsPage';
+import { GalleryPage } from '@/pages/GalleryPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
 const rootRoute = createRootRoute({
@@ -66,6 +70,30 @@ const prayerRoute = createRoute({
   component: PrayerTestimoniesPage,
 });
 
+const blogRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/blog',
+  component: BlogPage,
+});
+
+const messagesRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/blog/messages',
+  component: MessagesPage,
+});
+
+const legendsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/blog/legends',
+  component: LegendsPage,
+});
+
+const galleryRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/gallery',
+  component: GalleryPage,
+});
+
 const notFoundRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '*',
@@ -81,6 +109,10 @@ const routeTree = rootRoute.addChildren([
   giveRoute,
   contactRoute,
   prayerRoute,
+  blogRoute,
+  messagesRoute,
+  legendsRoute,
+  galleryRoute,
   notFoundRoute,
 ]);
 

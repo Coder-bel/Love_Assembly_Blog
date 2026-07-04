@@ -10,6 +10,8 @@ const navLinks = [
   { label: 'About', to: '/about' },
   { label: 'Leadership', to: '/leadership' },
   { label: 'Events', to: '/events' },
+  { label: 'Blog', to: '/blog' },
+  { label: 'Gallery', to: '/gallery' },
   { label: 'Contact', to: '/contact' },
 ];
 

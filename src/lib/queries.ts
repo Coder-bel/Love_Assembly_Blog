@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/supabase';
-import type { EventItem, Sermon, BlogPost, Leader, Parish, Ministry, Testimony } from '@/lib/types';
+import type { EventItem, Sermon, BlogPost, Leader, Parish, Ministry, Testimony, RccgLegend, GalleryImage } from '@/lib/types';
 
 export async function fetchUpcomingEvents(limit = 10): Promise<EventItem[]> {
   const now = new Date().toISOString();
@@ -103,6 +103,28 @@ export async function fetchTestimonies(limit = 20): Promise<Testimony[]> {
     .eq('approved', true)
     .order('created_at', { ascending: false })
     .limit(limit);
+  if (error) throw error;
+  return data ?? [];
+}
+
+export async function fetchLegends(): Promise<RccgLegend[]> {
+  const { data, error } = await supabase
+    .from('rccg_legends')
+    .select('*')
+    .order('display_order', { ascending: true });
+  if (error) throw error;
+  return data ?? [];
+}
+
+export async function fetchGalleryImages(category?: string): Promise<GalleryImage[]> {
+  let query = supabase
+    .from('gallery_images')
+    .select('*')
+    .order('display_order', { ascending: true });
+  if (category && category !== 'all') {
+    query = query.eq('category', category);
+  }
+  const { data, error } = await query;
   if (error) throw error;
   return data ?? [];
 }
