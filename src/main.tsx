@@ -5,6 +5,7 @@ import { router } from '@/lib/router';
 import { Toaster } from '@/components/ui/sonner';
 import './index.css';
 
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <RouterProvider router={router} />

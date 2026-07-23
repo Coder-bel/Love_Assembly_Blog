@@ -11,8 +11,8 @@ import { PrayerTestimoniesPage } from '@/pages/PrayerTestimoniesPage';
 import { BlogPage } from '@/pages/BlogPage';
 import { MessagesPage } from '@/pages/MessagesPage';
 import { LegendsPage } from '@/pages/LegendsPage';
-import { GalleryPage } from '@/pages/GalleryPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
+import { YayaPage } from '@/pages/YayaPage';
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -88,10 +88,10 @@ const legendsRoute = createRoute({
   component: LegendsPage,
 });
 
-const galleryRoute = createRoute({
+const yayaRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/gallery',
-  component: GalleryPage,
+  path: '/yaya',
+  component: YayaPage,
 });
 
 const notFoundRoute = createRoute({
@@ -112,7 +112,7 @@ const routeTree = rootRoute.addChildren([
   blogRoute,
   messagesRoute,
   legendsRoute,
-  galleryRoute,
+  yayaRoute,
   notFoundRoute,
 ]);
 

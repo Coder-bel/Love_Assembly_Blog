@@ -35,7 +35,7 @@ export function EventsPage() {
         breadcrumb="Home / Events"
         title="Events Calendar"
         description="Stay connected with everything happening at Love Assembly from worship services to conferences and community outreach."
-        bgImage="https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg"
+        bgImage="https://www.thecable.ng/wp-content/uploads/2023/03/adeboye.png"
       />
 
       {/* Upcoming events */}

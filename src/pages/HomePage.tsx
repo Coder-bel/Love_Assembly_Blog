@@ -8,8 +8,10 @@ import { CountUp } from '@/components/shared/CountUp';
 import { fetchLeaders, fetchUpcomingEvents } from '@/lib/queries';
 import { formatEventDateLong, formatEventTime } from '@/lib/format';
 import type { Leader, EventItem } from '@/lib/types';
+import { fetchHeroSlides } from '@/lib/queries';
 
-const heroImage = 'https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg';
+const heroImage = 'https://scontent-los4-1.xx.fbcdn.net/v/t39.30808-6/483741361_982029707466558_8769792280913899171_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx2048x1536&ctp=s960x960&_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=aoEcIeCe6WEQ7kNvwESeg9d&_nc_oc=AdpwgfEZ26n9d9YPrMo_3Q6gFCcFO_KIhTJcUa_faTg3mkOqH3Zj0gyb9bzwEw-utsU&_nc_zt=23&_nc_ht=scontent-los4-1.xx&_nc_gid=v6ZpAOczoaq0YPHo6EJeHw&_nc_ss=7b289&oh=00_AQCCWVXbEq1Xls-DfLsJtiadLvVKdg81hlgW6YfmWOyB4A&oe=6A66ED73';
+
 
 const stats = [
   { icon: Church, label: 'Years of Service', value: 13, suffix: '' },
@@ -19,23 +21,45 @@ const stats = [
 ];
 
 const weeklyServices = [
-  { name: 'Digging Deep', day: 'Tuesday', time: '5:30 – 6:30 PM', description: 'A midweek gathering to dig deeper into the Word and grow in understanding and revelation.' },
-  { name: 'Faith Clinic', day: 'Thursday', time: '5:30 – 6:30 PM', description: 'A time of teaching and impartation to strengthen and build your faith.' },
+  { name: 'Morning Prayers', day: 'Monday – Friday', time: '5:00 – 6:00 AM', description: 'Daily early morning prayers to begin each day covered in prayer and the presence of God.' },
+  { name: 'In His Presence', day: 'Wednesday', time: '6:00 – 7:00 AM', description: 'A time of quiet worship and communion in the presence of God.' },
+  { name: 'Digging Deep', day: 'Tuesday', time: '5:45 – 7:00 PM', description: 'A midweek gathering to dig deeper into the Word and grow in understanding and revelation.' },
+  { name: 'Faith Clinic', day: 'Thursday', time: '5:45 – 7:00 PM', description: 'A time of teaching and impartation to strengthen and build your faith.' },
+  { name: 'Night of Possibilities', day: 'Every 2nd Friday', time: '10:00 PM', description: 'A special monthly night of prayer, worship, and breakthrough — believing God for the impossible.' },
 ];
 
 const sundayServices = [
-  { name: "Workers' Meeting", time: '7:30 AM', description: 'A time of preparation, prayer, and coordination for all church workers ahead of Sunday service.' },
-  { name: 'Sunday School', time: '8:00 AM', description: 'Bible-based teaching and discussion for all ages before the main service begins.' },
-  { name: 'Sunday Service', time: '9:00 – 11:00 AM', description: 'Our main worship service with vibrant praise, deep teaching, and fellowship for the whole family.' },
+  { name: "Workers' Meeting", time: '6:45 – 7:45 AM', description: 'A time of preparation, prayer, and coordination for all church workers ahead of Sunday service.' },
+  { name: 'Sunday School', time: '7:45 – 8:45 AM', description: 'Bible-based teaching and discussion for all ages before the main service begins.' },
+  { name: 'Power Service', time: '8:45 – 11:00 AM', description: 'Our main worship service with vibrant praise, deep teaching, and fellowship for the whole family.' },
 ];
-
 
 export function HomePage() {
   const navigate = useNavigate();
   const [leaders, setLeaders] = useState<Leader[]>([]);
   const [events, setEvents] = useState<EventItem[]>([]);
   const [activeFlier, setActiveFlier] = useState(0);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [heroSlides, setHeroSlides] = useState<string[]>([heroImage]);
 
+useEffect(() => {
+  fetchHeroSlides()
+    .then((slides) => {
+      if (slides.length > 0) {
+        setHeroSlides([heroImage, ...slides.map((s) => s.image_url)]);
+      }
+    })
+    .catch(() => {});
+}, []);
+useEffect(() => {
+  const interval = setInterval(() => {
+    setActiveSlide((prev) => (prev + 1) % heroSlides.length);
+  }, 10000);
+  return () => clearInterval(interval);
+}, []);
+
+const nextSlide = () => setActiveSlide((prev) => (prev + 1) % heroSlides.length);
+const prevSlide = () => setActiveSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
   useEffect(() => {
     fetchLeaders(1)
       .then((l) => {
@@ -56,76 +80,114 @@ export function HomePage() {
   const prevFlier = () => setActiveFlier((prev) => (prev - 1 + events.length) % events.length);
   return (
     <div>
-      {/* HERO */}
-      <section className="relative min-h-[100vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <img src={heroImage} alt="" className="h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-br from-brand-950/85 via-brand-900/75 to-brand-800/65" />
-        </div>
 
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-32">
-          <div className="max-w-3xl">
-            <Reveal>
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-brand-100 backdrop-blur-sm ring-1 ring-white/20">
-                Welcome to Love Assembly
-              </span>
-            </Reveal>
-            <Reveal delay={100}>
-              <h1 className="mt-6 text-4xl sm:text-5xl lg:text-7xl font-bold text-white tracking-tight text-balance leading-[1.1]">
-                A Place to Belong.<br />
-                <span className="bg-gradient-to-r from-brand-200 to-gold-400 bg-clip-text text-transparent">
-                  A Place to Grow.
-                </span>
-              </h1>
-            </Reveal>
-            <Reveal delay={200}>
-              <p className="mt-6 text-lg sm:text-xl text-brand-100/90 leading-relaxed max-w-2xl">
-                RCCG Love Assembly is a church that believes in Jesus, a church that loves
-                God and people. We are a family of Christ where His agape love binds us together.
-              </p>
-            </Reveal>
-            <Reveal delay={300}>
-              <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                <Button
-                  size="lg"
-                  onClick={() => navigate({ to: '/about' })}
-                  className="bg-white text-brand-900 hover:bg-brand-50 text-base px-8"
-                >
-                  Learn About Us <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  onClick={() => navigate({ to: '/events' })}
-                  className="bg-white/10 text-white border-white/30 hover:bg-white/20 hover:text-white text-base px-8 backdrop-blur-sm"
-                >
-                  <Calendar className="mr-2 h-4 w-4" /> View Events
-                </Button>
-              </div>
-            </Reveal>
-            <Reveal delay={400}>
-              <div className="mt-10 flex items-center gap-6 text-sm text-brand-100/70">
-                <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4" />
-                  <span>RF48+W43, Loburo 110113, Ogun State</span>
-                </div>
-                <div className="h-4 w-px bg-white/20" />
-                <div className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4" />
-                  <span>Sundays 9:00 AM</span>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </div>
+{/* HERO */}
+<section className="relative min-h-[100vh] flex items-center overflow-hidden">
+  <div className="absolute inset-0 -z-10">
+    {heroSlides.map((slide, i) => (
+      <img
+        key={i}
+        src={slide}
+        alt=""
+        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${i === activeSlide ? 'opacity-100' : 'opacity-0'}`}
+      />
+    ))}
+    <div className="absolute inset-0 bg-gradient-to-br from-brand-950/85 via-brand-900/75 to-brand-800/65" />
+  </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-          <div className="flex h-10 w-6 items-start justify-center rounded-full border-2 border-white/30 p-1.5">
-            <div className="h-2 w-1 rounded-full bg-white/60 animate-bounce" />
+  {activeSlide === 0 && (
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-32">
+      <div className="max-w-3xl">
+        <Reveal>
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-brand-100 backdrop-blur-sm ring-1 ring-white/20">
+            Welcome to Love Assembly
+          </span>
+        </Reveal>
+        <Reveal delay={100}>
+          <h1 className="mt-6 text-4xl sm:text-5xl lg:text-7xl font-bold text-white tracking-tight text-balance leading-[1.1]">
+            A Place to Belong.<br />
+            <span className="bg-gradient-to-r from-brand-200 to-gold-400 bg-clip-text text-transparent">
+              A Place to Grow.
+            </span>
+          </h1>
+        </Reveal>
+        <Reveal delay={200}>
+          <p className="mt-6 text-lg sm:text-xl text-brand-100/90 leading-relaxed max-w-2xl">
+            RCCG Love Assembly is a church that believes in Jesus, a church that loves
+            God and people. We are a family of Christ where His agape love binds us together.
+          </p>
+        </Reveal>
+        <Reveal delay={300}>
+          <div className="mt-8 flex flex-col sm:flex-row gap-3">
+            <Button
+              size="lg"
+              onClick={() => navigate({ to: '/about' })}
+              className="bg-white text-brand-900 hover:bg-brand-50 text-base px-8"
+            >
+              Learn About Us <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              onClick={() => navigate({ to: '/events' })}
+              className="bg-white/10 text-white border-white/30 hover:bg-white/20 hover:text-white text-base px-8 backdrop-blur-sm"
+            >
+              <Calendar className="mr-2 h-4 w-4" /> View Events
+            </Button>
           </div>
-        </div>
-      </section>
+        </Reveal>
+        <Reveal delay={400}>
+          <div className="mt-10 flex items-center gap-6 text-sm text-brand-100/70">
+            <div className="flex items-center gap-2">
+              <MapPin className="h-4 w-4" />
+              <span>RF48+W43, Loburo 110113, Ogun State</span>
+            </div>
+            <div className="h-4 w-px bg-white/20" />
+            <div className="flex items-center gap-2">
+              <Calendar className="h-4 w-4" />
+              <span>Sundays 9:00 AM</span>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </div>
+  )}
+
+  {/* Slideshow arrows */}
+  <button
+    onClick={prevSlide}
+    className="absolute left-4 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-all hover:bg-white/20"
+    aria-label="Previous slide"
+  >
+    <ChevronLeft className="h-5 w-5" />
+  </button>
+  <button
+    onClick={nextSlide}
+    className="absolute right-4 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-all hover:bg-white/20"
+    aria-label="Next slide"
+  >
+    <ChevronRight className="h-5 w-5" />
+  </button>
+
+  {/* Dot navigation */}
+  <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex gap-2">
+    {heroSlides.map((_, i) => (
+      <button
+        key={i}
+        onClick={() => setActiveSlide(i)}
+        aria-label={`Go to slide ${i + 1}`}
+        className={`h-2 rounded-full transition-all ${i === activeSlide ? 'w-8 bg-white' : 'w-2 bg-white/40 hover:bg-white/60'}`}
+      />
+    ))}
+  </div>
+
+  {/* Scroll indicator */}
+  <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
+    <div className="flex h-10 w-6 items-start justify-center rounded-full border-2 border-white/30 p-1.5">
+      <div className="h-2 w-1 rounded-full bg-white/60 animate-bounce" />
+    </div>
+  </div>
+</section>
 
       {/* SERVICES & EVENTS SECTION */}
       <section className="py-20 lg:py-28 bg-slate-50">
@@ -141,7 +203,7 @@ export function HomePage() {
               />
             </div>
           </Reveal>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {weeklyServices.map((service, i) => (
               <Reveal key={service.name} delay={i * 100}>
                 <div className="group h-full rounded-2xl border border-slate-100 bg-white p-6 transition-all hover:shadow-lg hover:border-brand-200">
@@ -318,7 +380,7 @@ export function HomePage() {
               <div className="relative">
                 <div className="aspect-[4/3] overflow-hidden rounded-2xl shadow-xl">
                   <img
-                    src="https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg"
+                    src="https://scontent-los4-1.xx.fbcdn.net/v/t39.30808-6/483741361_982029707466558_8769792280913899171_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx2048x1536&ctp=s960x960&_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=aoEcIeCe6WEQ7kNvwESeg9d&_nc_oc=AdpwgfEZ26n9d9YPrMo_3Q6gFCcFO_KIhTJcUa_faTg3mkOqH3Zj0gyb9bzwEw-utsU&_nc_zt=23&_nc_ht=scontent-los4-1.xx&_nc_gid=v6ZpAOczoaq0YPHo6EJeHw&_nc_ss=7b289&oh=00_AQCCWVXbEq1Xls-DfLsJtiadLvVKdg81hlgW6YfmWOyB4A&oe=6A66ED73"
                     alt="Love Assembly congregation"
                     className="h-full w-full object-cover"
                   />

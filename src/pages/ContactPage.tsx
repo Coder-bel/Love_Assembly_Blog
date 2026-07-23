@@ -7,8 +7,8 @@ import { toast } from 'sonner';
 import { submitContactMessage } from '@/lib/formSubmit';
 
 const contactInfo = [
-  { icon: MapPin, label: 'Address', value: 'RF48+W43, Loburo 110113, Ogun State, Nigeria' },
-  { icon: Phone, label: 'Phone', value: '+234 800 123 4567' },
+  { icon: MapPin, label: 'Address', value: 'Abuja Juction,Redemption Camp, Mowe, Nigeria' },
+  { icon: Phone, label: 'Phone', value: '+234 806 014 1767' },
   { icon: Mail, label: 'Email', value: 'info@loveassembly.org' },
   { icon: Clock, label: 'Sunday Service Time', value: 'Sundays 9:00 AM' },
 ];
@@ -37,7 +37,7 @@ const handleSubmit = async (e: React.FormEvent) => {
         breadcrumb="Home / Contact"
         title="Contact Us"
         description="We'd love to hear from you. Whether you have a question, a prayer request, or just want to say hello reach out."
-        bgImage="https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg"
+        bgImage="https://scontent-los4-1.xx.fbcdn.net/v/t39.30808-6/483741361_982029707466558_8769792280913899171_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx2048x1536&ctp=s960x960&_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=aoEcIeCe6WEQ7kNvwESeg9d&_nc_oc=AdpwgfEZ26n9d9YPrMo_3Q6gFCcFO_KIhTJcUa_faTg3mkOqH3Zj0gyb9bzwEw-utsU&_nc_zt=23&_nc_ht=scontent-los4-1.xx&_nc_gid=v6ZpAOczoaq0YPHo6EJeHw&_nc_ss=7b289&oh=00_AQCCWVXbEq1Xls-DfLsJtiadLvVKdg81hlgW6YfmWOyB4A&oe=6A66ED73"
       />
 
       <section className="py-20 lg:py-28 bg-white">

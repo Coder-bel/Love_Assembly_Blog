@@ -13,6 +13,16 @@ export async function fetchUpcomingEvents(limit = 10): Promise<EventItem[]> {
   return data ?? [];
 }
 
+export async function fetchLiveStatus() {
+  const { data, error } = await supabase
+    .from('live_status')
+    .select('*')
+    .eq('id', 1)
+    .maybeSingle();
+  if (error) throw error;
+  return data;
+}
+
 export async function fetchAllEvents(): Promise<EventItem[]> {
   const { data, error } = await supabase
     .from('events')
@@ -40,6 +50,15 @@ export async function fetchSermonById(id: string): Promise<Sermon | null> {
     .maybeSingle();
   if (error) throw error;
   return data;
+}
+
+export async function fetchHeroSlides(): Promise<{ id: string; image_url: string }[]> {
+  const { data, error } = await supabase
+    .from('hero_slides')
+    .select('*')
+    .order('display_order', { ascending: true });
+  if (error) throw error;
+  return data ?? [];
 }
 
 export async function fetchBlogPosts(limit = 20, category?: string): Promise<BlogPost[]> {

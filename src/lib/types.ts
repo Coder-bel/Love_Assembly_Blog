@@ -116,6 +116,15 @@ export interface GalleryImage {
   caption: string | null;
   category: string;
   event_name: string | null;
+  event_date: string | null;
   display_order: number;
   created_at: string;
+}
+
+
+export interface LiveStatus {
+  id: number;
+  is_live: boolean;
+  youtube_url: string | null;
+  updated_at: string;
 }

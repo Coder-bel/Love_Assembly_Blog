@@ -3,9 +3,9 @@ import { Facebook, Instagram, Youtube, Twitter, Mail, Phone, MapPin, ExternalLin
 import { RCCGLogo } from '@/components/shared/RCCGLogo';
 
 const socialLinks = [
-  { icon: Facebook, href: '#', label: 'Facebook' },
+  { icon: Facebook, href: 'https://www.facebook.com/rccglampfamily/about/', label: 'Facebook' },
   { icon: Instagram, href: '#', label: 'Instagram' },
-  { icon: Youtube, href: '#', label: 'YouTube' },
+  { icon: Youtube, href: 'https://youtube.com/@rccglampfamily-camp4941?si=OJlGYbbL4C0FVtey', label: 'YouTube' },
   { icon: Twitter, href: '#', label: 'Twitter/X' },
 ];
 
@@ -14,7 +14,7 @@ const quickLinks = [
   { label: 'Leadership', to: '/leadership' },
   { label: 'Events', to: '/events' },
   { label: 'Blog', to: '/blog' },
-  { label: 'Gallery', to: '/gallery' },
+  { label: 'YAYA', to: '/yaya' },
   { label: 'About RCCG', to: '/about-rccg' },
 ];
 
@@ -96,11 +96,11 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-2.5 text-sm text-slate-400">
                 <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-brand-400" />
-                <span>3510 27 Street Northeast, Calgary, Alberta</span>
+                <span>Abuja Juction,Redemption Camp, Mowe, Nigeria</span>
               </li>
               <li className="flex items-center gap-2.5 text-sm text-slate-400">
                 <Phone className="h-4 w-4 shrink-0 text-brand-400" />
-                <a href="tel:+14031234567" className="hover:text-white transition-colors">+1 403 123 4567</a>
+                <a href="tel: 0806 014 1767" className="hover:text-white transition-colors">+234 806 014 1767</a>
               </li>
               <li className="flex items-center gap-2.5 text-sm text-slate-400">
                 <Mail className="h-4 w-4 shrink-0 text-brand-400" />

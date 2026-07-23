@@ -20,9 +20,9 @@ export function AboutZonePage() {
     <div>
       <PageHeader
         breadcrumb="Home / About"
-        title="About Christ Love Assembly"
+        title="About Love Assembly"
         description="Our roots, our mission, and the journey of faith that has shaped us into who we are today."
-        bgImage="https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg"
+        bgImage="https://www.thecable.ng/wp-content/uploads/2023/03/adeboye.png"
       />
 
       {/* Our Roots */}
@@ -32,8 +32,8 @@ export function AboutZonePage() {
             <Reveal>
               <div className="aspect-[4/3] overflow-hidden rounded-2xl shadow-xl">
                 <img
-                  src="https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg"
-                  alt="Christ Love Assembly"
+                  src="https://www.thecable.ng/wp-content/uploads/2023/03/adeboye.png"
+                  alt="Love Assembly"
                   className="h-full w-full object-cover"
                 />
               </div>
@@ -47,7 +47,7 @@ export function AboutZonePage() {
               <Reveal delay={200}>
                 <div className="mt-6 text-slate-600 leading-relaxed">
                   <p>
-                    Christ Love Assembly is one of the several thousand parishes of The Redeemed
+                    Love Assembly is one of the several thousand parishes of The Redeemed
                     Christian Church of God (RCCG) worldwide. RCCG was founded in Nigeria in the
                     year 1952. It started out as a small home group called "the Glory of God
                     fellowship" at Willoughby street, Ebute-Metta, Lagos, Nigeria in West Africa.
@@ -81,7 +81,7 @@ export function AboutZonePage() {
               <Reveal>
                 <div className="aspect-[4/3] overflow-hidden rounded-2xl shadow-xl">
                   <img
-                    src="https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg"
+                    src="https://scontent-los4-1.xx.fbcdn.net/v/t39.30808-6/483741361_982029707466558_8769792280913899171_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx2048x1536&ctp=s960x960&_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=aoEcIeCe6WEQ7kNvwESeg9d&_nc_oc=AdpwgfEZ26n9d9YPrMo_3Q6gFCcFO_KIhTJcUa_faTg3mkOqH3Zj0gyb9bzwEw-utsU&_nc_zt=23&_nc_ht=scontent-los4-1.xx&_nc_gid=v6ZpAOczoaq0YPHo6EJeHw&_nc_ss=7b289&oh=00_AQCCWVXbEq1Xls-DfLsJtiadLvVKdg81hlgW6YfmWOyB4A&oe=6A66ED73"
                     alt="Christ Love Assembly community"
                     className="h-full w-full object-cover"
                   />

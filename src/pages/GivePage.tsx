@@ -8,10 +8,10 @@ import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 
 const bankDetails = [
-  { label: 'Account Name', value: 'Love Assembly RCCG Zonal HQ' },
-  { label: 'Bank', value: 'Guaranty Trust Bank (GTBank)' },
-  { label: 'Account Number', value: '0123456789' },
-  { label: 'Sort Code', value: '058152' },
+  { label: 'Account Name', value: 'RCCG LOVE ASSEMBLY PARISH' },
+  { label: 'Bank', value: 'Ecobank Nigeria Plc' },
+  { label: 'Account Number', value: '3852020869' },
+  { label: 'Sort Code', value: 'N/A' },
 ];
 
 const givingOptions = [
@@ -41,7 +41,7 @@ export function GivePage() {
         breadcrumb="Home / Give"
         title="Give & Support"
         description="Your generosity makes it possible for us to share the love of Christ, support our community, and advance the work of the gospel."
-        bgImage="https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg"
+        bgImage="https://www.thecable.ng/wp-content/uploads/2023/03/adeboye.png"
       />
 
       {/* Giving options */}

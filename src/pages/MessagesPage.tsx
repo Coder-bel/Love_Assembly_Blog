@@ -6,11 +6,18 @@ import { Reveal } from '@/components/shared/Reveal';
 import { fetchBlogPosts } from '@/lib/queries';
 import { formatBlogDate } from '@/lib/format';
 import type { BlogPost } from '@/lib/types';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 
 export function MessagesPage() {
   const navigate = useNavigate();
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
 
   useEffect(() => {
     fetchBlogPosts(50, 'message')
@@ -55,7 +62,7 @@ export function MessagesPage() {
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {posts.map((post, i) => (
                 <Reveal key={post.id} delay={i * 80}>
-                  <article className="group h-full rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-100 transition-all hover:shadow-lg hover:-translate-y-1">
+                  <article className="group h-full flex flex-col rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-100 transition-all hover:shadow-lg hover:-translate-y-1">
                     {post.image_url && (
                       <div className="mb-4 aspect-[16/10] overflow-hidden rounded-xl">
                         <img
@@ -79,10 +86,16 @@ export function MessagesPage() {
                       </span>
                     </div>
                     {post.excerpt && (
-                      <p className="mt-3 text-sm text-slate-600 leading-relaxed line-clamp-4">
+                      <p className="mt-3 text-sm text-slate-600 leading-relaxed line-clamp-4 flex-1">
                         {post.excerpt}
                       </p>
                     )}
+                    <button
+                      onClick={() => setSelectedPost(post)}
+                      className="mt-4 self-start text-sm font-semibold text-brand-700 hover:text-brand-800 transition-colors"
+                    >
+                      Read More →
+                    </button>
                   </article>
                 </Reveal>
               ))}
@@ -90,6 +103,43 @@ export function MessagesPage() {
           )}
         </div>
       </section>
+
+      {/* Full Message Modal */}
+      <Dialog open={!!selectedPost} onOpenChange={(open) => !open && setSelectedPost(null)}>
+        <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+          {selectedPost && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="text-2xl font-bold text-brand-950">
+                  {selectedPost.title}
+                </DialogTitle>
+              </DialogHeader>
+              {selectedPost.image_url && (
+                <div className="overflow-hidden rounded-xl">
+                  <img
+                    src={selectedPost.image_url}
+                    alt={selectedPost.title}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+              )}
+              <div className="flex flex-wrap gap-4 text-sm text-slate-500">
+                {(selectedPost.preacher_name || selectedPost.author) && (
+                  <span className="flex items-center gap-1.5">
+                    <User className="h-4 w-4" /> {selectedPost.preacher_name || selectedPost.author}
+                  </span>
+                )}
+                <span className="flex items-center gap-1.5">
+                  <Calendar className="h-4 w-4" /> {formatBlogDate(selectedPost.published_at)}
+                </span>
+              </div>
+              <p className="text-slate-600 leading-relaxed whitespace-pre-line">
+                {selectedPost.body}
+              </p>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

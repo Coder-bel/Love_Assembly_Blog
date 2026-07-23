@@ -5,13 +5,14 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { RCCGLogo } from '@/components/shared/RCCGLogo';
 
+
 const navLinks = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Leadership', to: '/leadership' },
   { label: 'Events', to: '/events' },
+  { label: 'YAYA', to: '/yaya' },
   { label: 'Blog', to: '/blog' },
-  { label: 'Gallery', to: '/gallery' },
   { label: 'Contact', to: '/contact' },
 ];
 
@@ -20,7 +21,6 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -36,14 +36,16 @@ export function Navbar() {
 
   return (
     <>
-      <header
-        className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-          transparent
-            ? 'bg-transparent'
-            : 'bg-white/95 backdrop-blur-md shadow-md border-b border-slate-100'
-        )}
-      >
+     <header
+  className={cn(
+    'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+    transparent
+      ? 'bg-transparent'
+      : 'bg-white/95 backdrop-blur-md shadow-md border-b border-slate-100'
+  )}
+>
+
+
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-16 lg:h-20">
           {/* Logo lockup: RCCG logo + Love Assembly text */}
           <Link to="/" className="flex items-center gap-2.5 group">
@@ -78,19 +80,19 @@ export function Navbar() {
               const active = location.pathname === link.to;
               return (
                 <Link
-                  key={link.to}
-                  to={link.to}
-                  className={cn(
-                    'px-3 py-2 text-sm font-medium rounded-lg transition-all',
-                    transparent
-                      ? active
-                        ? 'text-white bg-white/15'
-                        : 'text-white/85 hover:text-white hover:bg-white/10'
-                      : active
-                        ? 'text-brand-900 bg-brand-50'
-                        : 'text-slate-600 hover:text-brand-900 hover:bg-slate-50'
-                  )}
-                >
+  key={link.to}
+  to={link.to}
+  className={cn(
+    'px-3 py-2 text-sm font-medium rounded-lg transition-all',
+    transparent
+      ? active
+        ? 'text-white bg-white/15'
+        : 'text-white/85 hover:text-white hover:bg-white/10'
+      : active
+        ? 'text-brand-900 bg-brand-50 dark:text-white dark:bg-white/10'
+        : 'text-slate-600 hover:text-brand-900 hover:bg-slate-50 dark:text-slate-300 dark:hover:text-white dark:hover:bg-white/10'
+  )}
+>
                   {link.label}
                 </Link>
               );
@@ -98,10 +100,10 @@ export function Navbar() {
           </nav>
 
           {/* CTA + mobile toggle */}
-          <div className="flex items-center gap-2">
-            <Button
-              size="sm"
-              onClick={() => navigate({ to: '/give' })}
+<div className="flex items-center gap-2">
+  <Button
+    size="sm"
+    onClick={() => navigate({ to: '/give' })}
               className={cn(
                 'hidden sm:inline-flex transition-all',
                 transparent

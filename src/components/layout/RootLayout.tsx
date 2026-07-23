@@ -4,6 +4,7 @@ import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 import { WhatsAppButton } from './WhatsAppButton';
 import { ScrollToTop } from './ScrollToTop';
+import { LivePopup } from '@/components/shared/LivePopup';
 
 export function RootLayout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -19,6 +20,7 @@ export function RootLayout({ children }: { children: React.ReactNode }) {
       <main className="flex-1">{children}</main>
       <Footer />
       <WhatsAppButton />
+      <LivePopup />
     </div>
   );
 }
