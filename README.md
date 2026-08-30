@@ -1,4 +1,4 @@
-# Love Assembly — Zonal Headquarters Website
+# Love Assembly: Zonal Headquarters Website
 
 Official website for **Love Assembly**, a Zonal Headquarters under **The Redeemed Christian Church of God (RCCG)**.
 
