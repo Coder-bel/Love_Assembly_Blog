@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
-import { Copy, Check, Building2, CreditCard, Globe, Heart, Shield } from 'lucide-react';
+import { Copy, Check, Building2, CreditCard, Globe, Heart,} from 'lucide-react';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { SectionHeading } from '@/components/shared/SectionHeading';
 import { Reveal } from '@/components/shared/Reveal';

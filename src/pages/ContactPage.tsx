@@ -74,9 +74,9 @@ const handleSubmit = async (e: React.FormEvent) => {
 		  <iframe 
 		    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.692063734702!2d3.4652969000000002!3d6.8072625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103bc0c8a34c4c83%3A0xdc622c657ec16b47!2sRF48%2BW43%2C%20Loburo%20110113%2C%20Ogun%20State!5e0!3m2!1sen!2sng!4v1783172044102!5m2!1sen!2sng" 
                     style={{ border: 0 }} 
-		    allowfullscreen 
+		    allowFullScreen 
 		    loading="lazy" 
-                    referrerpolicy="strict-origin-when-cross-origin">
+                    referrerPolicy="strict-origin-when-cross-origin">
 		  </iframe>
                 </div>
               </Reveal>

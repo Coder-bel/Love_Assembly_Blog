@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Facebook, Instagram, Youtube, MessageCircle, Send, Loader2, CheckCircle2, Flame, Users, Sunrise, Moon, Clock, MapPin, Heart, ArrowRight } from 'lucide-react';
+import { MessageCircle, Send, Loader2, CheckCircle2, Flame, Users, Sunrise, Moon, Clock, MapPin, Heart, ArrowRight } from 'lucide-react';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { SectionHeading } from '@/components/shared/SectionHeading';
 import { Reveal } from '@/components/shared/Reveal';
