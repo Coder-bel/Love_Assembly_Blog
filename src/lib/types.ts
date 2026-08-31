@@ -128,3 +128,19 @@ export interface LiveStatus {
   youtube_url: string | null;
   updated_at: string;
 }
+
+export interface YayaSignup {
+  id: string;
+  name: string;
+  phone: string;
+  location: string;
+  created_at: string;
+}
+
+export interface YayaGalleryItem {
+  id: string;
+  media_url: string;
+  caption: string | null;
+  display_order: number;
+  created_at: string;
+}

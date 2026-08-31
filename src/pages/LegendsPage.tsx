@@ -25,7 +25,7 @@ export function LegendsPage() {
         breadcrumb="Home / Blog / RCCG Legends"
         title="RCCG Legends"
         description="Short biographies of notable figures in The Redeemed Christian Church of God."
-        bgImage="https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg"
+        bgImage="https://www.thecable.ng/wp-content/uploads/2023/03/adeboye.png"
       />
 
       <section className="py-20 lg:py-28 bg-slate-50">

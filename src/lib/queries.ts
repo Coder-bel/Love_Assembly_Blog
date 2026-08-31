@@ -1,6 +1,5 @@
 import { supabase } from '@/lib/supabase';
-import type { EventItem, Sermon, BlogPost, Leader, Parish, Ministry, Testimony, RccgLegend, GalleryImage } from '@/lib/types';
-
+import type { EventItem, Sermon, BlogPost, Leader, Parish, Ministry, Testimony, RccgLegend, GalleryImage, YayaGalleryItem } from '@/lib/types';
 export async function fetchUpcomingEvents(limit = 10): Promise<EventItem[]> {
   const now = new Date().toISOString();
   const { data, error } = await supabase
@@ -144,6 +143,15 @@ export async function fetchGalleryImages(category?: string): Promise<GalleryImag
     query = query.eq('category', category);
   }
   const { data, error } = await query;
+  if (error) throw error;
+  return data ?? [];
+}
+
+export async function fetchYayaGallery(): Promise<YayaGalleryItem[]> {
+  const { data, error } = await supabase
+    .from('yaya_gallery')
+    .select('*')
+    .order('display_order', { ascending: true });
   if (error) throw error;
   return data ?? [];
 }

@@ -73,3 +73,15 @@ export async function submitTestimony(data: { name: string; title: string; body:
     message: data.body,
   });
 }
+
+export async function submitYayaSignup(data: { name: string; phone: string; location: string }) {
+  const { error } = await supabase.from('yaya_signups').insert([data]);
+  if (error) throw error;
+
+  await sendToSheets({
+    type: 'YAYA Connect Signup' as any,
+    name: data.name,
+    phone: data.phone,
+    message: `Location: ${data.location}`,
+  });
+}

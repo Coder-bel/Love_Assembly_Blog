@@ -164,7 +164,7 @@ export function AboutZonePage() {
           <SectionHeading
             eyebrow="What Drives Us"
             title="Our Core Values"
-            description="These values shape everything we do — from how we worship to how we serve our community."
+            description="These values shape everything we do from how we worship to how we serve our community."
           />
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((value, i) => (
